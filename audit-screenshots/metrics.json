@@ -1,0 +1,352 @@
+[
+  {
+    "screen": "Portada",
+    "viewport": "landscape_mobile_732x352",
+    "scrollH": 352,
+    "innerH": 352,
+    "scrollW": 732,
+    "innerW": 732,
+    "overflowY": false,
+    "overflowX": false
+  },
+  {
+    "screen": "Mapa",
+    "viewport": "landscape_mobile_732x352",
+    "scrollH": 352,
+    "innerH": 352,
+    "scrollW": 732,
+    "innerW": 732,
+    "overflowY": false,
+    "overflowX": false
+  },
+  {
+    "screen": "Estacion 1",
+    "viewport": "landscape_mobile_732x352",
+    "scrollH": 352,
+    "innerH": 352,
+    "scrollW": 732,
+    "innerW": 732,
+    "overflowY": false,
+    "overflowX": false
+  },
+  {
+    "screen": "Estacion 2 Intro",
+    "viewport": "landscape_mobile_732x352",
+    "scrollH": 352,
+    "innerH": 352,
+    "scrollW": 732,
+    "innerW": 732,
+    "overflowY": false,
+    "overflowX": false
+  },
+  {
+    "screen": "Estacion 2 Cuento",
+    "viewport": "landscape_mobile_732x352",
+    "scrollH": 352,
+    "innerH": 352,
+    "scrollW": 732,
+    "innerW": 732,
+    "overflowY": false,
+    "overflowX": false
+  },
+  {
+    "screen": "Estacion 3",
+    "viewport": "landscape_mobile_732x352",
+    "scrollH": 352,
+    "innerH": 352,
+    "scrollW": 732,
+    "innerW": 732,
+    "overflowY": false,
+    "overflowX": false
+  },
+  {
+    "screen": "Estacion 4",
+    "viewport": "landscape_mobile_732x352",
+    "scrollH": 352,
+    "innerH": 352,
+    "scrollW": 732,
+    "innerW": 732,
+    "overflowY": false,
+    "overflowX": false
+  },
+  {
+    "screen": "Meta",
+    "viewport": "landscape_mobile_732x352",
+    "scrollH": 352,
+    "innerH": 352,
+    "scrollW": 732,
+    "innerW": 732,
+    "overflowY": false,
+    "overflowX": false
+  },
+  {
+    "screen": "Portada",
+    "viewport": "landscape_mobile_844x390",
+    "scrollH": 390,
+    "innerH": 390,
+    "scrollW": 844,
+    "innerW": 844,
+    "overflowY": false,
+    "overflowX": false
+  },
+  {
+    "screen": "Mapa",
+    "viewport": "landscape_mobile_844x390",
+    "scrollH": 390,
+    "innerH": 390,
+    "scrollW": 844,
+    "innerW": 844,
+    "overflowY": false,
+    "overflowX": false
+  },
+  {
+    "screen": "Estacion 1",
+    "viewport": "landscape_mobile_844x390",
+    "scrollH": 390,
+    "innerH": 390,
+    "scrollW": 844,
+    "innerW": 844,
+    "overflowY": false,
+    "overflowX": false
+  },
+  {
+    "screen": "Estacion 2 Intro",
+    "viewport": "landscape_mobile_844x390",
+    "scrollH": 390,
+    "innerH": 390,
+    "scrollW": 844,
+    "innerW": 844,
+    "overflowY": false,
+    "overflowX": false
+  },
+  {
+    "screen": "Estacion 2 Cuento",
+    "viewport": "landscape_mobile_844x390",
+    "scrollH": 390,
+    "innerH": 390,
+    "scrollW": 844,
+    "innerW": 844,
+    "overflowY": false,
+    "overflowX": false
+  },
+  {
+    "screen": "Estacion 3",
+    "viewport": "landscape_mobile_844x390",
+    "scrollH": 390,
+    "innerH": 390,
+    "scrollW": 844,
+    "innerW": 844,
+    "overflowY": false,
+    "overflowX": false
+  },
+  {
+    "screen": "Estacion 4",
+    "viewport": "landscape_mobile_844x390",
+    "scrollH": 390,
+    "innerH": 390,
+    "scrollW": 844,
+    "innerW": 844,
+    "overflowY": false,
+    "overflowX": false
+  },
+  {
+    "screen": "Meta",
+    "viewport": "landscape_mobile_844x390",
+    "scrollH": 390,
+    "innerH": 390,
+    "scrollW": 844,
+    "innerW": 844,
+    "overflowY": false,
+    "overflowX": false
+  },
+  {
+    "screen": "Portada",
+    "viewport": "portrait_mobile_390x844",
+    "scrollH": 844,
+    "innerH": 844,
+    "scrollW": 390,
+    "innerW": 390,
+    "overflowY": false,
+    "overflowX": false
+  },
+  {
+    "screen": "Mapa",
+    "viewport": "portrait_mobile_390x844",
+    "scrollH": 844,
+    "innerH": 844,
+    "scrollW": 390,
+    "innerW": 390,
+    "overflowY": false,
+    "overflowX": false
+  },
+  {
+    "screen": "Meta",
+    "viewport": "portrait_mobile_390x844",
+    "scrollH": 844,
+    "innerH": 844,
+    "scrollW": 390,
+    "innerW": 390,
+    "overflowY": false,
+    "overflowX": false
+  },
+  {
+    "screen": "Portada",
+    "viewport": "tablet_landscape_1024x768",
+    "scrollH": 768,
+    "innerH": 768,
+    "scrollW": 1024,
+    "innerW": 1024,
+    "overflowY": false,
+    "overflowX": false
+  },
+  {
+    "screen": "Mapa",
+    "viewport": "tablet_landscape_1024x768",
+    "scrollH": 768,
+    "innerH": 768,
+    "scrollW": 1024,
+    "innerW": 1024,
+    "overflowY": false,
+    "overflowX": false
+  },
+  {
+    "screen": "Estacion 1",
+    "viewport": "tablet_landscape_1024x768",
+    "scrollH": 768,
+    "innerH": 768,
+    "scrollW": 1024,
+    "innerW": 1024,
+    "overflowY": false,
+    "overflowX": false
+  },
+  {
+    "screen": "Estacion 2 Intro",
+    "viewport": "tablet_landscape_1024x768",
+    "scrollH": 768,
+    "innerH": 768,
+    "scrollW": 1024,
+    "innerW": 1024,
+    "overflowY": false,
+    "overflowX": false
+  },
+  {
+    "screen": "Estacion 2 Cuento",
+    "viewport": "tablet_landscape_1024x768",
+    "scrollH": 768,
+    "innerH": 768,
+    "scrollW": 1024,
+    "innerW": 1024,
+    "overflowY": false,
+    "overflowX": false
+  },
+  {
+    "screen": "Estacion 3",
+    "viewport": "tablet_landscape_1024x768",
+    "scrollH": 768,
+    "innerH": 768,
+    "scrollW": 1024,
+    "innerW": 1024,
+    "overflowY": false,
+    "overflowX": false
+  },
+  {
+    "screen": "Estacion 4",
+    "viewport": "tablet_landscape_1024x768",
+    "scrollH": 768,
+    "innerH": 768,
+    "scrollW": 1024,
+    "innerW": 1024,
+    "overflowY": false,
+    "overflowX": false
+  },
+  {
+    "screen": "Meta",
+    "viewport": "tablet_landscape_1024x768",
+    "scrollH": 768,
+    "innerH": 768,
+    "scrollW": 1024,
+    "innerW": 1024,
+    "overflowY": false,
+    "overflowX": false
+  },
+  {
+    "screen": "Portada",
+    "viewport": "desktop_1440x900",
+    "scrollH": 900,
+    "innerH": 900,
+    "scrollW": 1440,
+    "innerW": 1440,
+    "overflowY": false,
+    "overflowX": false
+  },
+  {
+    "screen": "Mapa",
+    "viewport": "desktop_1440x900",
+    "scrollH": 900,
+    "innerH": 900,
+    "scrollW": 1440,
+    "innerW": 1440,
+    "overflowY": false,
+    "overflowX": false
+  },
+  {
+    "screen": "Estacion 1",
+    "viewport": "desktop_1440x900",
+    "scrollH": 900,
+    "innerH": 900,
+    "scrollW": 1440,
+    "innerW": 1440,
+    "overflowY": false,
+    "overflowX": false
+  },
+  {
+    "screen": "Estacion 2 Intro",
+    "viewport": "desktop_1440x900",
+    "scrollH": 900,
+    "innerH": 900,
+    "scrollW": 1440,
+    "innerW": 1440,
+    "overflowY": false,
+    "overflowX": false
+  },
+  {
+    "screen": "Estacion 2 Cuento",
+    "viewport": "desktop_1440x900",
+    "scrollH": 900,
+    "innerH": 900,
+    "scrollW": 1440,
+    "innerW": 1440,
+    "overflowY": false,
+    "overflowX": false
+  },
+  {
+    "screen": "Estacion 3",
+    "viewport": "desktop_1440x900",
+    "scrollH": 900,
+    "innerH": 900,
+    "scrollW": 1440,
+    "innerW": 1440,
+    "overflowY": false,
+    "overflowX": false
+  },
+  {
+    "screen": "Estacion 4",
+    "viewport": "desktop_1440x900",
+    "scrollH": 900,
+    "innerH": 900,
+    "scrollW": 1440,
+    "innerW": 1440,
+    "overflowY": false,
+    "overflowX": false
+  },
+  {
+    "screen": "Meta",
+    "viewport": "desktop_1440x900",
+    "scrollH": 900,
+    "innerH": 900,
+    "scrollW": 1440,
+    "innerW": 1440,
+    "overflowY": false,
+    "overflowX": false
+  }
+]

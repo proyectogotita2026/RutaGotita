@@ -1,0 +1,129 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Tokens de Dirección de Arte: Acuarela Pastel HUDN */
+  --blh-lila: #b79ce8;
+  --blh-lila-dark: #6b4fa8;
+  --blh-rosa: #f6a6c9;
+  --blh-rosa-dark: #d9609a;
+  --blh-menta: #bfebdd;
+  --blh-menta-dark: #2ca37a;
+  --blh-amarillo: #ffe69a;
+  --blh-celeste: #cfe8ff;
+  --blh-crema: #fff8f3;
+  --blh-text: #3b2a5c;
+  --blh-text-muted: #6e5c8a;
+
+  /* Tokens de Estación 3: La Gotita Valiente (Ámbar / Amarillo suave) */
+  --accent-e3: #ffc857;
+  --accent-e3-dark: #e08a00;
+  --accent-e3-soft: #fff3cc;
+  --accent-e3-border: rgba(224, 138, 0, 0.35);
+
+  /* Tokens de Estación 4: La Gotita Generosa (Rosa / Fucsia suave) */
+  --accent-e4: #f6a6c9;
+  --accent-e4-dark: #d9609a;
+  --accent-e4-soft: #ffe3f0;
+  --accent-e4-border: rgba(217, 96, 154, 0.35);
+
+  /* Tokens de La Meta: Dorado suave + Rosa */
+  --accent-meta: #ffd36e;
+  --accent-meta-dark: #e0a100;
+  --accent-meta-soft: #fff3cc;
+
+  /* Sombras suaves multicapa */
+  --blh-shadow-soft: 0 10px 30px rgba(107, 79, 168, 0.12), 0 4px 10px rgba(107, 79, 168, 0.06);
+  --blh-shadow-card:
+    0 16px 40px -10px rgba(107, 79, 168, 0.18), 0 6px 14px -4px rgba(107, 79, 168, 0.1);
+  --blh-shadow-pill: 0 6px 20px -2px rgba(107, 79, 168, 0.25);
+  --blh-shadow-amber: 0 12px 30px -4px rgba(224, 138, 0, 0.3);
+}
+
+@layer base {
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    color: #3b2a5c;
+  }
+}
+
+/* Glassmorphism y utilidades personalizadas */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1.5px solid rgba(255, 255, 255, 0.7);
+}
+
+.glass-modal {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 2px solid rgba(255, 255, 255, 0.9);
+}
+
+/* Glass card acuarela crema */
+.watercolor-glass-card {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1.5px solid rgba(255, 255, 255, 0.85);
+  box-shadow:
+    0 14px 36px -8px rgba(107, 79, 168, 0.14),
+    0 4px 12px -2px rgba(107, 79, 168, 0.06);
+}
+
+/* Scrollbar fina estilizada */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 5px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(255, 243, 204, 0.4);
+  border-radius: 9999px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #ffc857;
+  border-radius: 9999px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #e08a00;
+}
+
+/* Integración de mascota sin recuadro blanco sobre fondo crema/pastel */
+.mascot-blend {
+  mix-blend-mode: multiply;
+  filter: contrast(1.05);
+}
+
+/* Fondo degradado suave para CTA móvil sticky */
+.cta-fade-gradient {
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 248, 243, 0) 0%,
+    rgba(255, 248, 243, 0.85) 25%,
+    rgba(255, 248, 243, 0.98) 100%
+  );
+}
+
+/* Borde punteado lila/rosa para tarjeta de meta */
+.meta-dotted-border {
+  border: 2px dashed rgba(217, 96, 154, 0.45);
+}
+
+@keyframes shimmerEffect {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.animate-shimmer {
+  animation: shimmerEffect 2.8s infinite linear;
+}
+
