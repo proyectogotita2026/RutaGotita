@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Play, Volume2, VolumeX, ArrowRight, Sparkles } from 'lucide-react';
-import { videoInicioPrincipal } from '../../assets/images';
+import { videoInicioPrincipal, mapBg, ALL_GOTITA_IMAGES } from '../../assets/images';
 
 interface IntroVideoScreenProps {
   onComplete: () => void;
@@ -12,6 +12,15 @@ export const IntroVideoScreen: React.FC<IntroVideoScreenProps> = ({ onComplete }
   const [isPlaying, setIsPlaying] = useState<boolean>(true);
   const [isMuted, setIsMuted] = useState<boolean>(false);
   const [autoplayBlocked, setAutoplayBlocked] = useState<boolean>(false);
+  const [isBuffering, setIsBuffering] = useState<boolean>(true);
+
+  // Precargar mapa y variantes de gotita mientras se reproduce el video
+  useEffect(() => {
+    [mapBg, ...ALL_GOTITA_IMAGES].forEach((src) => {
+      const img = new Image();
+      img.src = src;
+    });
+  }, []);
 
   // Intentar reproducir automáticamente con sonido
   useEffect(() => {
@@ -90,9 +99,22 @@ export const IntroVideoScreen: React.FC<IntroVideoScreenProps> = ({ onComplete }
         src={videoInicioPrincipal}
         playsInline
         preload="auto"
+        onCanPlay={() => setIsBuffering(false)}
+        onPlaying={() => setIsBuffering(false)}
+        onWaiting={() => setIsBuffering(true)}
         onEnded={handleVideoEnded}
         className="w-full h-full object-cover sm:object-contain bg-black"
       />
+
+      {/* Indicador suave mientras carga el video en red */}
+      {isBuffering && !autoplayBlocked && (
+        <div className="absolute inset-0 z-10 flex flex-col items-center justify-center pointer-events-none">
+          <div className="px-4 py-2 rounded-full bg-slate-900/75 text-white text-xs sm:text-sm font-fredoka font-bold backdrop-blur-md border border-white/20 shadow-lg flex items-center gap-2">
+            <span className="w-2.5 h-2.5 rounded-full bg-[#F6A6C9] animate-ping" />
+            <span>Cargando video de bienvenida...</span>
+          </div>
+        </div>
+      )}
 
       {/* ======================================================== */}
       {/* 2. CONTROLES SUPERIORES FLOTANTES SOBRE EL VIDEO         */}

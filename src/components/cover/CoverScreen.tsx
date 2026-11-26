@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Play, Maximize2, Minimize2 } from 'lucide-react';
 import { ActionButton } from '../ui/ActionButton';
 import { useFullscreen } from '../../hooks/useFullscreen';
-import { coverBg } from '../../assets/images';
+import { coverBg, mapBg, ALL_GOTITA_IMAGES } from '../../assets/images';
 
 interface CoverScreenProps {
   onStart: () => void;
@@ -19,6 +19,17 @@ export const CoverScreen: React.FC<CoverScreenProps> = ({ onStart }) => {
     await enterFullscreen();
     onStart();
   };
+
+  // Precargar mapa y gotitas en segundo plano tras montar la portada
+  useEffect(() => {
+    const timer = window.setTimeout(() => {
+      [mapBg, ...ALL_GOTITA_IMAGES].forEach((src) => {
+        const img = new Image();
+        img.src = src;
+      });
+    }, 600);
+    return () => window.clearTimeout(timer);
+  }, []);
 
   // Tecla 'F' para pantalla completa desde la portada
   useEffect(() => {

@@ -45,14 +45,6 @@ export const StationFourRiddleView: React.FC<StationFourRiddleViewProps> = ({
   const isCurrentRevealed = revealedIndices.has(currentIndex);
   const isLastRiddle = currentIndex === RIDDLES_DATA.length - 1;
 
-  // Precargar imagen de la siguiente adivinanza
-  useEffect(() => {
-    const nextIdx = (currentIndex + 1) % RIDDLES_DATA.length;
-    const nextImgSrc = `/assets/estacion4/${RIDDLES_DATA[nextIdx].imagen}`;
-    const img = new Image();
-    img.src = nextImgSrc;
-  }, [currentIndex]);
-
   // Sonido con Web Audio API
   const playPopSound = useCallback(() => {
     try {
@@ -256,17 +248,18 @@ export const StationFourRiddleView: React.FC<StationFourRiddleViewProps> = ({
             isLandscapeShort ? 'h-10 min-h-[40px]' : 'h-12 min-h-[48px]'
           }`}
         >
-          {/* Botón Volver (44px táctil) */}
+          {/* Botón Volver con texto claro "Mapa" */}
           <button
             type="button"
             onClick={onBackToMap}
             className={`${
-              isLandscapeShort ? 'w-9 h-9' : 'w-11 h-11'
-            } rounded-full bg-white/95 border border-[#D9609A]/30 text-[#D9609A] hover:text-[#3B2A5C] flex items-center justify-center shadow-2xs active:scale-95 transition-all cursor-pointer`}
+              isLandscapeShort ? 'h-8 px-2.5 text-xs' : 'h-9 sm:h-10 px-3 text-xs sm:text-sm'
+            } rounded-full bg-white/95 border border-[#D9609A]/30 text-[#D9609A] hover:text-[#3B2A5C] inline-flex items-center justify-center gap-1.5 font-fredoka font-bold shadow-2xs active:scale-95 transition-all cursor-pointer`}
             title="Volver al mapa"
             aria-label="Volver al mapa interactivo"
           >
-            <ArrowLeft size={isLandscapeShort ? 17 : 20} className="stroke-[2.5]" />
+            <ArrowLeft size={isLandscapeShort ? 15 : 17} className="stroke-[2.5]" />
+            <span>Mapa</span>
           </button>
 
           {/* Chip central "4 · La Gotita Generosa" */}

@@ -88,17 +88,18 @@ export const StationThreePuzzleTimerView: React.FC<StationThreePuzzleTimerViewPr
           isLandscapeShort ? 'h-11 min-h-[44px]' : 'h-[52px] min-h-[52px]'
         }`}
       >
-        {/* Botón Volver con icono (44px táctil en móvil, 38px en landscape bajo) */}
+        {/* Botón Volver con texto claro "Mapa" */}
         <button
           type="button"
           onClick={onBackToMap}
           className={`${
-            isLandscapeShort ? 'w-9 h-9' : 'w-11 h-11'
-          } rounded-full bg-white/95 border border-[#E08A00]/30 text-[#E08A00] hover:text-[#3B2A5C] flex items-center justify-center shadow-2xs active:scale-95 transition-all cursor-pointer`}
+            isLandscapeShort ? 'h-8 px-2.5 text-xs' : 'h-9 sm:h-10 px-3 text-xs sm:text-sm'
+          } rounded-full bg-white/95 border border-[#E08A00]/30 text-[#E08A00] hover:text-[#3B2A5C] inline-flex items-center justify-center gap-1.5 font-fredoka font-bold shadow-2xs active:scale-95 transition-all cursor-pointer`}
           title="Volver al mapa"
           aria-label="Volver al mapa interactivo"
         >
-          <ArrowLeft size={isLandscapeShort ? 18 : 20} className="stroke-[2.5]" />
+          <ArrowLeft size={isLandscapeShort ? 15 : 17} className="stroke-[2.5]" />
+          <span>Mapa</span>
         </button>
 
         {/* Chip central "3 · La Gotita Valiente" */}

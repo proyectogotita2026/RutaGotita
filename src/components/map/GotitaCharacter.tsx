@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import type { WaypointCoordinates } from '../../types/route.types';
 import {
@@ -7,6 +7,7 @@ import {
   gotaViajeraImg,
   gotaValienteImg,
   gotaGenerosaImg,
+  ALL_GOTITA_IMAGES,
 } from '../../assets/images';
 
 interface GotitaCharacterProps {
@@ -15,6 +16,7 @@ interface GotitaCharacterProps {
   onArrive?: () => void;
   stationName?: string;
   stationIndex?: number;
+  fromStationIndex?: number;
 }
 
 /**
@@ -61,9 +63,23 @@ export const GotitaCharacter: React.FC<GotitaCharacterProps> = ({
   onArrive,
   stationName,
   stationIndex = 0,
+  fromStationIndex = 0,
 }) => {
   const [imageError, setImageError] = useState(false);
-  const lastArrivedIndexRef = useRef<number>(stationIndex);
+  const arrivalHandledRef = useRef<boolean>(false);
+
+  // Precargar todas las variantes de Gotita para cambios instantáneos sin parpadeo
+  useEffect(() => {
+    ALL_GOTITA_IMAGES.forEach((src) => {
+      const img = new Image();
+      img.src = src;
+    });
+  }, []);
+
+  // Reiniciar marca de llegada al iniciar/terminar viaje
+  useEffect(() => {
+    arrivalHandledRef.current = false;
+  }, [isTraveling, stationIndex]);
 
   // Gotita temática dinámica según la estación de la ruta
   const getGotitaImage = (index: number): string => {
@@ -77,9 +93,7 @@ export const GotitaCharacter: React.FC<GotitaCharacterProps> = ({
       case 3:
         return gotaValienteImg;
       case 4:
-        return gotaGenerosaImg;
       case 5:
-        return gotaGenerosaImg;
       default:
         return gotaGenerosaImg;
     }
@@ -132,12 +146,27 @@ export const GotitaCharacter: React.FC<GotitaCharacterProps> = ({
   };
 
   const waypoints = isTraveling
-    ? getWaypoints(lastArrivedIndexRef.current, stationIndex)
+    ? getWaypoints(fromStationIndex, stationIndex)
     : [{ x: coordinates.x, y: coordinates.y }];
 
   const xKeyframes = waypoints.map((p) => `${p.x}%`);
   const yKeyframes = waypoints.map((p) => `${p.y}%`);
   const travelDuration = isTraveling ? Math.max(1.3, (waypoints.length - 1) * 0.38) : 0.2;
+
+  const completeArrival = useCallback(() => {
+    if (!isTraveling || arrivalHandledRef.current) return;
+    arrivalHandledRef.current = true;
+    onArrive?.();
+  }, [isTraveling, onArrive]);
+
+  // Respaldo de seguridad por si el navegador reduce animaciones o pausa rAF en segundo plano
+  useEffect(() => {
+    if (!isTraveling) return;
+    const safetyTimer = window.setTimeout(() => {
+      completeArrival();
+    }, travelDuration * 1000 + 250);
+    return () => window.clearTimeout(safetyTimer);
+  }, [isTraveling, travelDuration, completeArrival]);
 
   return (
     <motion.div
@@ -152,9 +181,8 @@ export const GotitaCharacter: React.FC<GotitaCharacterProps> = ({
         ease: 'easeInOut',
       }}
       onAnimationComplete={() => {
-        lastArrivedIndexRef.current = stationIndex;
-        if (isTraveling && onArrive) {
-          onArrive();
+        if (isTraveling) {
+          completeArrival();
         }
       }}
     >
@@ -164,10 +192,10 @@ export const GotitaCharacter: React.FC<GotitaCharacterProps> = ({
       <AnimatePresence mode="wait">
         <motion.div
           key={speechText}
-          initial={{ opacity: 0, y: 3, scale: 0.85 }}
+          initial={{ opacity: 0, y: 3, scale: 0.9 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.85 }}
-          transition={{ duration: 0.22 }}
+          exit={{ opacity: 0, scale: 0.9 }}
+          transition={{ duration: 0.2 }}
           className="relative mb-0.5 sm:mb-1 lg:mb-1.5 flex flex-col items-center"
         >
           <div className="px-2 py-0.5 sm:px-2.5 sm:py-0.5 lg:px-3 lg:py-1 rounded-xl bg-white/95 backdrop-blur-md border-[1.5px] border-[#F6A6C9] shadow-md flex items-center gap-1.5 max-w-[200px] sm:max-w-none">
@@ -212,7 +240,7 @@ export const GotitaCharacter: React.FC<GotitaCharacterProps> = ({
 
       {/* ======================================================== */}
       {/* CONTENEDOR DEL PERSONAJE CON BRINCO Y FLOTACIÓN          */}
-      {/* Escalado proporcional con container queries (cqh)       */}
+      {/* Sin desmontar el <img> para que JAMÁS desaparezca        */}
       {/* ======================================================== */}
       <motion.div
         animate={
@@ -238,23 +266,18 @@ export const GotitaCharacter: React.FC<GotitaCharacterProps> = ({
         }}
         className="relative filter drop-shadow-[0_8px_18px_rgba(107,79,168,0.28)] flex items-center justify-center"
       >
-        <AnimatePresence mode="wait">
-          {!imageError ? (
-            <motion.img
-              key={gotitaImageUrl}
-              src={gotitaImageUrl}
-              alt={stationName || 'La Gotita'}
-              initial={{ scale: 0.85, opacity: 0.6 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.85, opacity: 0 }}
-              transition={{ duration: 0.22, ease: 'easeOut' }}
-              className="w-full h-full object-contain pointer-events-none"
-              onError={() => setImageError(true)}
-            />
-          ) : (
-            <GotitaVectorGraphic isTraveling={isTraveling} />
-          )}
-        </AnimatePresence>
+        {!imageError ? (
+          <img
+            src={gotitaImageUrl}
+            alt={stationName || 'La Gotita'}
+            decoding="sync"
+            loading="eager"
+            className="w-full h-full object-contain pointer-events-none select-none transition-transform duration-200"
+            onError={() => setImageError(true)}
+          />
+        ) : (
+          <GotitaVectorGraphic isTraveling={isTraveling} />
+        )}
       </motion.div>
 
       {/* Sombra proyectada en el piso proporcional */}

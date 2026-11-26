@@ -53,11 +53,10 @@ export const ActionButton: React.FC<ActionButtonProps> = ({
       animate={
         pulse && !disabled
           ? {
-              scale: [1, 1.04, 1],
               boxShadow: [
-                '0 4px 14px rgba(251, 113, 148, 0.3)',
-                '0 8px 24px rgba(251, 113, 148, 0.6)',
-                '0 4px 14px rgba(251, 113, 148, 0.3)',
+                '0 4px 14px rgba(251, 113, 148, 0.35)',
+                '0 8px 26px rgba(251, 113, 148, 0.65)',
+                '0 4px 14px rgba(251, 113, 148, 0.35)',
               ],
             }
           : undefined

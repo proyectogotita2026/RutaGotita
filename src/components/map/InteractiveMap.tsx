@@ -34,6 +34,7 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({ onBackToCover, o
 
   const {
     currentStationIndex,
+    previousStationIndex,
     currentStation,
     highestUnlockedIndex,
     completedStationIds,
@@ -229,6 +230,7 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({ onBackToCover, o
           onArrive={finishTraveling}
           stationName={currentStation.numberLabel || currentStation.name}
           stationIndex={currentStationIndex}
+          fromStationIndex={previousStationIndex}
         />
 
         {/* Pin de Calibración temporal al hacer clic en Modo Debug */}
@@ -440,12 +442,8 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({ onBackToCover, o
                 onCompleteAndAdvance={() => {
                   markStationCompleted('estacion-4');
                   closeModal();
-                  if (onGoToMeta) {
-                    onGoToMeta();
-                  } else {
-                    // Avanza automáticamente hacia la Meta final (Banco de Leche Humana)
-                    advanceToNextStation();
-                  }
+                  // Camina la Gotita Generosa hasta el Hospital HUDN (Estación 5) y luego abre la Meta
+                  advanceToNextStation();
                 }}
               />
             </motion.div>

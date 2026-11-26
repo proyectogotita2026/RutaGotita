@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   ArrowLeft,
@@ -23,15 +23,18 @@ export const MetaScreen: React.FC<MetaScreenProps> = ({ onBackToMap, onRestart }
   const [soundEnabled, setSoundEnabled] = useState<boolean>(true);
   const [isSkipped, setIsSkipped] = useState<boolean>(false);
   const [showRestartModal, setShowRestartModal] = useState<boolean>(false);
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState<boolean>(false);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState<boolean>(() =>
+    typeof window !== 'undefined' && window.matchMedia
+      ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      : false
+  );
   const [isLandscape, setIsLandscape] = useState<boolean>(false);
   const [isLowHeight, setIsLowHeight] = useState<boolean>(false);
 
   // Frase rotativa fija durante la sesión
-  const finalPhrase = useMemo(() => {
-    const idx = Math.floor(Math.random() * FRASES_FINALES.length);
-    return FRASES_FINALES[idx];
-  }, []);
+  const [finalPhrase] = useState<string>(
+    () => FRASES_FINALES[Math.floor(Math.random() * FRASES_FINALES.length)]
+  );
 
   // Detección de dimensiones y orientación
   useEffect(() => {
@@ -45,11 +48,10 @@ export const MetaScreen: React.FC<MetaScreenProps> = ({ onBackToMap, onRestart }
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // Detección de preferencia de movimiento reducido
+  // Escucha cambios en preferencia de movimiento reducido
   useEffect(() => {
     if (typeof window !== 'undefined' && window.matchMedia) {
       const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-      setPrefersReducedMotion(mediaQuery.matches);
       const listener = (e: MediaQueryListEvent) => setPrefersReducedMotion(e.matches);
       mediaQuery.addEventListener('change', listener);
       return () => mediaQuery.removeEventListener('change', listener);

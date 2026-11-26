@@ -37,6 +37,14 @@ export const StationTwoStoryView: React.FC<StationTwoStoryViewProps> = ({
 
   const totalDuration = 218; // Duración total de la narración en segundos (03:38)
 
+  // Precargar todas las láminas del cuento para transiciones instantáneas
+  useEffect(() => {
+    CUENTO_SCENES.forEach((scene) => {
+      const img = new Image();
+      img.src = scene.image;
+    });
+  }, []);
+
   // Determinar la escena actual según el tiempo del audio
   const getCurrentScene = (): CuentoScene => {
     if (!isStarted && currentTime === 0) {
@@ -183,11 +191,12 @@ export const StationTwoStoryView: React.FC<StationTwoStoryViewProps> = ({
             if (audio) audio.pause();
             onBackToMap();
           }}
-          className="min-h-[34px] min-w-[34px] w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white/95 border border-white shadow-md hover:bg-white text-[#0284C7] flex items-center justify-center transition-all duration-150 active:scale-95 outline-none backdrop-blur-md"
+          className="min-h-[34px] h-8 sm:h-10 px-2.5 sm:px-3.5 rounded-full bg-white/95 border border-white shadow-md hover:bg-white text-[#0284C7] flex items-center gap-1.5 font-fredoka font-bold text-xs sm:text-sm transition-all duration-150 active:scale-95 outline-none backdrop-blur-md cursor-pointer"
           title="Volver al mapa"
           aria-label="Volver al mapa"
         >
-          <ArrowLeft size={18} className="stroke-[2.5]" />
+          <ArrowLeft size={16} className="stroke-[2.5]" />
+          <span>Mapa</span>
         </button>
       </div>
 
@@ -252,24 +261,15 @@ export const StationTwoStoryView: React.FC<StationTwoStoryViewProps> = ({
         className="relative z-20 w-full h-full flex items-center justify-center p-1 sm:p-2 cursor-pointer overflow-hidden"
       >
         <div className="relative w-full h-full flex items-center justify-center">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={currentScene.id}
-              initial={{ opacity: 0, scale: 0.99 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.99 }}
-              transition={{ duration: 0.22, ease: 'easeOut' }}
-              className="relative w-full h-full flex items-center justify-center"
-            >
-              <img
-                src={currentScene.image}
-                alt={currentScene.title}
-                className="w-auto h-auto max-h-[98dvh] max-w-[99vw] object-contain rounded-xl sm:rounded-2xl shadow-[0_16px_40px_-8px_rgba(2,132,199,0.25)] border-2 sm:border-3 border-white select-none pointer-events-auto filter drop-shadow-md"
-                loading="eager"
-                decoding="async"
-              />
-            </motion.div>
-          </AnimatePresence>
+          <div className="relative w-full h-full flex items-center justify-center">
+            <img
+              src={currentScene.image}
+              alt={currentScene.title}
+              className="w-auto h-auto max-h-[98dvh] max-w-[99vw] object-contain rounded-xl sm:rounded-2xl shadow-[0_16px_40px_-8px_rgba(2,132,199,0.25)] border-2 sm:border-3 border-white select-none pointer-events-auto filter drop-shadow-md transition-opacity duration-200"
+              loading="eager"
+              decoding="sync"
+            />
+          </div>
 
           {/* Botón inicial en la Portada */}
           {!isStarted && (

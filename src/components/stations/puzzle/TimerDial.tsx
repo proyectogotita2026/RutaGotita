@@ -293,13 +293,13 @@ export const TimerDial: React.FC<TimerDialProps> = ({
               <span>{statusLabel}</span>
             </div>
 
-            {/* Opción rápida si terminaron antes */}
-            {hasStarted && !isFinished && onEarlyFinish && (
+            {/* Opción rápida si terminaron antes o usan reloj externo */}
+            {!isFinished && onEarlyFinish && (
               <button
                 type="button"
                 onClick={onEarlyFinish}
                 className="text-[11px] font-fredoka font-semibold text-[#8C5400] hover:underline cursor-pointer"
-                title="Avanzar anticipadamente"
+                title="Habilitar avance anticipado"
               >
                 ¿Terminaron antes?
               </button>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import type { RiddleItem } from '../../../types/riddle.types';
 import { Sparkles, HelpCircle, CheckCircle2 } from 'lucide-react';
@@ -14,13 +14,8 @@ export const AnswerReveal: React.FC<AnswerRevealProps> = ({
   riddle,
   isRevealed,
   onRevealClick,
-  isDesktop = false,
 }) => {
   const shouldReduceMotion = useReducedMotion();
-  const [imgError, setImgError] = useState(false);
-
-  // Ruta oficial en /assets/estacion4/
-  const imageSrc = `/assets/estacion4/${riddle.imagen}`;
 
   return (
     <div
@@ -55,24 +50,15 @@ export const AnswerReveal: React.FC<AnswerRevealProps> = ({
             </div>
           </div>
 
-          {/* Lado derecho: SILUETA generada desde la MISMA imagen con filtros CSS */}
+          {/* Lado derecho: SILUETA misteriosa */}
           <div className="shrink-0 flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14">
-            {!imgError ? (
-              <img
-                src={imageSrc}
-                alt={riddle.altText}
-                width={56}
-                height={56}
-                loading="lazy"
-                decoding="async"
-                onError={() => setImgError(true)}
-                className="w-full h-full object-contain pointer-events-none filter brightness-0 opacity-12 blur-[0.8px] transition-all"
-              />
-            ) : (
-              <span className="text-2xl filter grayscale brightness-0 opacity-15 blur-[0.8px]">
-                {riddle.emojiFallback}
-              </span>
-            )}
+            <span
+              role="img"
+              aria-label={riddle.altText}
+              className="text-2xl sm:text-3xl filter grayscale brightness-0 opacity-15 blur-[0.8px]"
+            >
+              {riddle.emojiFallback}
+            </span>
           </div>
         </motion.button>
       ) : (
@@ -103,22 +89,13 @@ export const AnswerReveal: React.FC<AnswerRevealProps> = ({
             {/* Resplandor y halo suave */}
             <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-[#F6A6C9] via-[#FFE69A] to-[#BFEBDD] blur-md opacity-50 pointer-events-none" />
 
-            {!imgError ? (
-              <img
-                src={imageSrc}
-                alt={riddle.altText}
-                width={isDesktop ? 96 : 72}
-                height={isDesktop ? 96 : 72}
-                loading="lazy"
-                decoding="async"
-                onError={() => setImgError(true)}
-                className="relative z-10 w-full h-full object-contain filter drop-shadow-[0_4px_8px_rgba(217,96,154,0.3)] pointer-events-none"
-              />
-            ) : (
-              <span className="relative z-10 text-3xl sm:text-4xl filter drop-shadow-xs">
-                {riddle.emojiFallback}
-              </span>
-            )}
+            <span
+              role="img"
+              aria-label={riddle.altText}
+              className="relative z-10 text-3xl sm:text-4xl md:text-5xl filter drop-shadow-xs"
+            >
+              {riddle.emojiFallback}
+            </span>
           </motion.div>
 
           {/* Texto y etiqueta de respuesta en la misma fila */}

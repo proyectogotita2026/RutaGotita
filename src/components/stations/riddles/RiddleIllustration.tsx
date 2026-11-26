@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import type { RiddleItem } from '../../../types/riddle.types';
 import { Sparkles, Heart } from 'lucide-react';
@@ -15,7 +15,6 @@ export const RiddleIllustration: React.FC<RiddleIllustrationProps> = ({
   size = 'md',
 }) => {
   const shouldReduceMotion = useReducedMotion();
-  const [imgError, setImgError] = useState(false);
 
   // Dimensiones según tamaño
   const sizeClasses = {
@@ -62,32 +61,20 @@ export const RiddleIllustration: React.FC<RiddleIllustrationProps> = ({
             : 'none',
         }}
       >
-        {/* Intento de cargar imagen PNG oficial */}
-        {!imgError ? (
-          <img
-            src={`/assets/images/riddles/${riddle.imagen}`}
-            alt={riddle.altText}
-            onError={() => setImgError(true)}
-            className={`w-[82%] h-[82%] object-contain transition-all duration-700 ${
+        {/* Ilustración con emoji estilizado de alta nitidez y silueta misteriosa */}
+        <div className="relative w-full h-full flex items-center justify-center">
+          <span
+            role="img"
+            aria-label={riddle.altText}
+            className={`transition-all duration-700 transform ${
               isRevealed
-                ? 'brightness-100 opacity-100 filter drop-shadow-sm'
-                : 'brightness-0 opacity-12 blur-[0.6px]'
+                ? 'scale-100 filter-none opacity-100 drop-shadow-xs'
+                : 'scale-90 filter grayscale brightness-0 opacity-15 blur-[0.8px]'
             }`}
-          />
-        ) : (
-          /* Fallback visual enriquecido con emoji grande y silueta misteriosa */
-          <div className="relative w-full h-full flex items-center justify-center">
-            <span
-              className={`transition-all duration-700 transform ${
-                isRevealed
-                  ? 'scale-100 filter-none opacity-100 drop-shadow-xs'
-                  : 'scale-90 filter grayscale brightness-0 opacity-15 blur-[0.8px]'
-              }`}
-            >
-              {riddle.emojiFallback}
-            </span>
-          </div>
-        )}
+          >
+            {riddle.emojiFallback}
+          </span>
+        </div>
 
         {/* Destellos y corazoncitos decorativos en Estado B */}
         {isRevealed && !shouldReduceMotion && (

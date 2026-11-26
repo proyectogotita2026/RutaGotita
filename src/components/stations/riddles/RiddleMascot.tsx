@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { gotaGenerosaImg } from '../../../assets/images';
 
@@ -12,15 +12,6 @@ export const RiddleMascot: React.FC<RiddleMascotProps> = ({
   variant = 'mobile',
 }) => {
   const shouldReduceMotion = useReducedMotion();
-  const [loadErrorThinking, setLoadErrorThinking] = useState(false);
-  const [loadErrorHappy, setLoadErrorHappy] = useState(false);
-
-  // Rutas esperadas en assets
-  const thinkingSrc = '/assets/estacion4/gotita-pensando.png';
-  const happySrc = '/assets/estacion4/gotita-feliz.png';
-
-  const isThinkingFailed = loadErrorThinking;
-  const isHappyFailed = loadErrorHappy;
 
   // ============================================================
   // VARIANTE MÓVIL VERTICAL (72-96px, SIN círculo ni recuadro)
@@ -52,47 +43,13 @@ export const RiddleMascot: React.FC<RiddleMascotProps> = ({
             filter: 'drop-shadow(0 4px 12px rgba(217, 96, 154, 0.35))',
           }}
         >
-          {isRevealed ? (
-            /* Estado B: Gotita feliz */
-            !isHappyFailed ? (
-              <img
-                src={happySrc}
-                alt="Gotita feliz"
-                width={96}
-                height={96}
-                onError={() => setLoadErrorHappy(true)}
-                className="w-full h-full object-contain pointer-events-none"
-              />
-            ) : (
-              <img
-                src={gotaGenerosaImg}
-                alt="La Gotita Generosa"
-                width={96}
-                height={96}
-                className="w-full h-full object-contain pointer-events-none"
-              />
-            )
-          ) : (
-            /* Estado A: Gotita pensando */
-            !isThinkingFailed ? (
-              <img
-                src={thinkingSrc}
-                alt="Gotita pensando"
-                width={96}
-                height={96}
-                onError={() => setLoadErrorThinking(true)}
-                className="w-full h-full object-contain pointer-events-none"
-              />
-            ) : (
-              <img
-                src={gotaGenerosaImg}
-                alt="La Gotita Generosa"
-                width={96}
-                height={96}
-                className="w-full h-full object-contain pointer-events-none"
-              />
-            )
-          )}
+          <img
+            src={gotaGenerosaImg}
+            alt="La Gotita Generosa"
+            width={96}
+            height={96}
+            className="w-full h-full object-contain pointer-events-none"
+          />
         </motion.div>
       </div>
     );
@@ -112,7 +69,7 @@ export const RiddleMascot: React.FC<RiddleMascotProps> = ({
           <span className="text-sm opacity-80">🌸</span>
         </div>
 
-        {/* Gotita GRANDE (40-50vh) directa, sin círculos ni marcos */}
+        {/* Gotita GRANDE directa, sin círculos ni marcos */}
         <motion.div
           animate={
             isRevealed && !shouldReduceMotion
@@ -136,45 +93,13 @@ export const RiddleMascot: React.FC<RiddleMascotProps> = ({
             filter: 'drop-shadow(0 10px 22px rgba(217, 96, 154, 0.3))',
           }}
         >
-          {isRevealed ? (
-            !isHappyFailed ? (
-              <img
-                src={happySrc}
-                alt="Gotita feliz"
-                width={256}
-                height={256}
-                onError={() => setLoadErrorHappy(true)}
-                className="w-full h-full object-contain pointer-events-none"
-              />
-            ) : (
-              <img
-                src={gotaGenerosaImg}
-                alt="La Gotita Generosa"
-                width={256}
-                height={256}
-                className="w-full h-full object-contain pointer-events-none"
-              />
-            )
-          ) : (
-            !isThinkingFailed ? (
-              <img
-                src={thinkingSrc}
-                alt="Gotita pensando"
-                width={256}
-                height={256}
-                onError={() => setLoadErrorThinking(true)}
-                className="w-full h-full object-contain pointer-events-none"
-              />
-            ) : (
-              <img
-                src={gotaGenerosaImg}
-                alt="La Gotita Generosa"
-                width={256}
-                height={256}
-                className="w-full h-full object-contain pointer-events-none"
-              />
-            )
-          )}
+          <img
+            src={gotaGenerosaImg}
+            alt="La Gotita Generosa"
+            width={256}
+            height={256}
+            className="w-full h-full object-contain pointer-events-none"
+          />
         </motion.div>
 
         {/* Sombra suave ovalada */}

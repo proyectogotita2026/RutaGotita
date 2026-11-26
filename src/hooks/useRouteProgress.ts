@@ -6,6 +6,7 @@ const STORAGE_KEY = 'la_ruta_gotita_progress_v1';
 
 export interface RouteProgressReturn {
   currentStationIndex: number;
+  previousStationIndex: number;
   currentStation: StationData;
   highestUnlockedIndex: number;
   completedStationIds: string[];
@@ -29,6 +30,7 @@ export interface RouteProgressReturn {
 
 export function useRouteProgress(): RouteProgressReturn {
   const [currentStationIndex, setCurrentStationIndex] = useState<number>(0);
+  const [previousStationIndex, setPreviousStationIndex] = useState<number>(0);
   const [highestUnlockedIndex, setHighestUnlockedIndex] = useState<number>(0);
   const [completedStationIds, setCompletedStationIds] = useState<string[]>([]);
   const [isTraveling, setIsTraveling] = useState<boolean>(false);
@@ -57,6 +59,7 @@ export function useRouteProgress(): RouteProgressReturn {
         return;
       }
 
+      setPreviousStationIndex(currentStationIndex);
       setIsTraveling(true);
       setCurrentStationIndex(targetIndex);
 
@@ -103,6 +106,7 @@ export function useRouteProgress(): RouteProgressReturn {
   }, []);
 
   const resetRoute = useCallback(() => {
+    setPreviousStationIndex(0);
     setCurrentStationIndex(0);
     setHighestUnlockedIndex(0);
     setCompletedStationIds([]);
@@ -122,6 +126,7 @@ export function useRouteProgress(): RouteProgressReturn {
 
   return {
     currentStationIndex,
+    previousStationIndex,
     currentStation,
     highestUnlockedIndex,
     completedStationIds,
