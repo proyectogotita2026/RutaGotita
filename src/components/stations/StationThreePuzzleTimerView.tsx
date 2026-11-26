@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowLeft, ArrowRight, Puzzle, Volume2, VolumeX, Sparkles } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Puzzle, Volume2, VolumeX, Sparkles, BookOpen } from 'lucide-react';
 import { ROUTE_STATIONS } from '../../config/routeData';
-import { mapBg } from '../../assets/images';
+import { mapBg, gotaValienteImg } from '../../assets/images';
 import { TimerDial } from './puzzle/TimerDial';
 import { MissionSteps } from './puzzle/MissionSteps';
 import { MascotBubble } from './puzzle/MascotBubble';
+import { StationIntroSign } from './StationIntroSign';
 
 interface StationThreePuzzleTimerViewProps {
   onBackToMap: () => void;
@@ -23,6 +24,7 @@ export const StationThreePuzzleTimerView: React.FC<StationThreePuzzleTimerViewPr
   const [isTimeFinished, setIsTimeFinished] = useState<boolean>(false);
   const [hasPassedTenSeconds, setHasPassedTenSeconds] = useState<boolean>(false);
   const [isEarlyFinished, setIsEarlyFinished] = useState<boolean>(false);
+  const [showSign, setShowSign] = useState<boolean>(Boolean(station?.signMessage));
 
   // Detección de dimensiones
   const [windowDimensions, setWindowDimensions] = useState({
@@ -47,6 +49,22 @@ export const StationThreePuzzleTimerView: React.FC<StationThreePuzzleTimerViewPr
 
   // Habilitación del CTA
   const isCtaEnabled = isTimeFinished || hasPassedTenSeconds || isEarlyFinished;
+
+  if (showSign && station?.signMessage) {
+    return (
+      <StationIntroSign
+        stationNumberLabel={station.numberLabel || 'Estación 3'}
+        stationTitle={station.name}
+        message={station.signMessage}
+        mascotSrc={gotaValienteImg}
+        mascotAlt="La Gotita Valiente"
+        ctaLabel="¡Aceptar misión!"
+        variant="amber"
+        onContinue={() => setShowSign(false)}
+        onBackToMap={onBackToMap}
+      />
+    );
+  }
 
   return (
     <div className="relative w-screen h-dvh flex flex-col overflow-hidden select-none bg-[#FFF8F3] text-[#3B2A5C]">
@@ -102,13 +120,19 @@ export const StationThreePuzzleTimerView: React.FC<StationThreePuzzleTimerViewPr
           <span>Mapa</span>
         </button>
 
-        {/* Chip central "3 · La Gotita Valiente" */}
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FFF3CC] border border-[#FFC857] shadow-2xs">
+        {/* Chip central "3 · La Gotita Valiente" (tocar para releer letrero) */}
+        <button
+          type="button"
+          onClick={() => station?.signMessage && setShowSign(true)}
+          title="Ver letrero de la estación"
+          className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FFF3CC] hover:bg-[#FFEAA3] border border-[#FFC857] shadow-2xs cursor-pointer transition-colors"
+        >
           <Puzzle size={14} className="text-[#E08A00]" />
           <h1 className="text-xs sm:text-sm font-fredoka font-bold text-[#3B2A5C] tracking-wide">
             3 · <span className="text-[#E08A00]">La Gotita Valiente</span>
           </h1>
-        </div>
+          {station?.signMessage && <BookOpen size={12} className="text-[#E08A00]/75 ml-0.5" />}
+        </button>
 
         {/* Botón Silenciar / Sonido */}
         <button

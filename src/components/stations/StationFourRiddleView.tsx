@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, Heart, Volume2, Sparkles, ArrowRight, RotateCcw, Award } from 'lucide-react';
+import { ArrowLeft, Heart, Volume2, Sparkles, ArrowRight, RotateCcw, Award, BookOpen } from 'lucide-react';
 import { RIDDLES_DATA } from '../../config/riddleData';
-import { mapBg } from '../../assets/images';
+import { ROUTE_STATIONS } from '../../config/routeData';
+import { mapBg, gotaGenerosaImg } from '../../assets/images';
 import { HeartProgress } from './riddles/HeartProgress';
 import { RiddleCard } from './riddles/RiddleCard';
 import { RiddleMascot } from './riddles/RiddleMascot';
+import { StationIntroSign } from './StationIntroSign';
 
 interface StationFourRiddleViewProps {
   onBackToMap: () => void;
@@ -16,10 +18,12 @@ export const StationFourRiddleView: React.FC<StationFourRiddleViewProps> = ({
   onBackToMap,
   onCompleteAndAdvance,
 }) => {
+  const station = ROUTE_STATIONS.find((s) => s.id === 'estacion-4');
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [revealedIndices, setRevealedIndices] = useState<Set<number>>(new Set());
   const [isSpeaking, setIsSpeaking] = useState<boolean>(false);
   const [confettiActive, setConfettiActive] = useState<boolean>(false);
+  const [showSign, setShowSign] = useState<boolean>(Boolean(station?.signMessage));
 
   // Dimensiones de ventana
   const [windowDimensions, setWindowDimensions] = useState({
@@ -158,6 +162,7 @@ export const StationFourRiddleView: React.FC<StationFourRiddleViewProps> = ({
 
   // Teclado: Espacio/Enter = revelar/siguiente, Flechas = navegar
   useEffect(() => {
+    if (showSign) return;
     const handleKeyDown = (e: KeyboardEvent) => {
       if (['INPUT', 'TEXTAREA'].includes((e.target as HTMLElement)?.tagName)) return;
 
@@ -179,7 +184,7 @@ export const StationFourRiddleView: React.FC<StationFourRiddleViewProps> = ({
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isCurrentRevealed, currentIndex]);
+  }, [isCurrentRevealed, currentIndex, showSign]);
 
   // Swipe táctil
   const touchStartX = useRef<number>(0);
@@ -198,6 +203,22 @@ export const StationFourRiddleView: React.FC<StationFourRiddleViewProps> = ({
       handlePrev();
     }
   };
+
+  if (showSign && station?.signMessage) {
+    return (
+      <StationIntroSign
+        stationNumberLabel={station.numberLabel || 'Estación 4'}
+        stationTitle={station.name}
+        message={station.signMessage}
+        mascotSrc={gotaGenerosaImg}
+        mascotAlt="La Gotita Generosa"
+        ctaLabel="¡Aceptar último desafío!"
+        variant="pink"
+        onContinue={() => setShowSign(false)}
+        onBackToMap={onBackToMap}
+      />
+    );
+  }
 
   return (
     <div
@@ -262,13 +283,19 @@ export const StationFourRiddleView: React.FC<StationFourRiddleViewProps> = ({
             <span>Mapa</span>
           </button>
 
-          {/* Chip central "4 · La Gotita Generosa" */}
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FFE3F0] border border-[#F6A6C9] shadow-2xs">
+          {/* Chip central "4 · La Gotita Generosa" (tocar para releer letrero) */}
+          <button
+            type="button"
+            onClick={() => station?.signMessage && setShowSign(true)}
+            title="Ver letrero de la estación"
+            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FFE3F0] hover:bg-[#FFD4E8] border border-[#F6A6C9] shadow-2xs cursor-pointer transition-colors"
+          >
             <Heart size={14} className="fill-[#D9609A] text-[#D9609A]" />
             <h1 className="text-xs sm:text-sm font-fredoka font-bold text-[#3B2A5C] tracking-wide">
               4 · <span className="text-[#D9609A]">La Gotita Generosa</span>
             </h1>
-          </div>
+            {station?.signMessage && <BookOpen size={12} className="text-[#D9609A]/75 ml-0.5" />}
+          </button>
 
           {/* Progreso inline en Landscape */}
           {isLandscapeShort && (

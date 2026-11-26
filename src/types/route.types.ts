@@ -62,6 +62,7 @@ export interface StationData {
   subtitle: string;
   shortDescription: string;
   educationalContent: string;
+  signMessage?: string; // Mensaje narrativo para el letrero introductorio de la estación
   type: StationType;
   coordinates: WaypointCoordinates;
   themeColor: 'pink' | 'sky' | 'mint' | 'lavender' | 'cream' | 'hudn';

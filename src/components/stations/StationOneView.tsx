@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, ArrowRight, Sparkles, MapPin, Check } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Sparkles, MapPin, Check, BookOpen } from 'lucide-react';
 import { ROUTE_STATIONS } from '../../config/routeData';
 import { mapBg, gotitaCuriosaImg, gotitaImg } from '../../assets/images';
+import { StationIntroSign } from './StationIntroSign';
 
 interface StationOneViewProps {
   onBackToMap: () => void;
@@ -30,6 +31,23 @@ export const StationOneView: React.FC<StationOneViewProps> = ({
 
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [imgError, setImgError] = useState<boolean>(false);
+  const [showSign, setShowSign] = useState<boolean>(Boolean(station?.signMessage));
+
+  if (showSign && station?.signMessage) {
+    return (
+      <StationIntroSign
+        stationNumberLabel={station.numberLabel || 'Estación 1'}
+        stationTitle={station.name}
+        message={station.signMessage}
+        mascotSrc={imgError ? gotitaImg : gotitaCuriosaImg}
+        mascotAlt="La Gotita Curiosa"
+        ctaLabel="¡Vamos a aprender!"
+        variant="lavender"
+        onContinue={() => setShowSign(false)}
+        onBackToMap={onBackToMap}
+      />
+    );
+  }
 
   const currentQ = questions[currentIndex] || questions[0];
   const isLastQuestion = currentIndex === questions.length - 1;
@@ -116,13 +134,19 @@ export const StationOneView: React.FC<StationOneViewProps> = ({
             <span>Mapa</span>
           </motion.button>
 
-          {/* Chip central de la estación */}
-          <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/90 backdrop-blur-md border border-[#B79CE8]/40 shadow-xs">
+          {/* Chip central de la estación (tocar para releer letrero) */}
+          <button
+            type="button"
+            onClick={() => station?.signMessage && setShowSign(true)}
+            title="Ver letrero de la estación"
+            className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/90 hover:bg-white backdrop-blur-md border border-[#B79CE8]/40 shadow-xs cursor-pointer transition-colors"
+          >
             <span className="w-2 h-2 rounded-full bg-[#B79CE8] animate-pulse" />
             <h1 className="text-xs sm:text-sm font-bold text-[#3B2A5C] tracking-tight font-fredoka">
               1. <span className="text-[#6B4FA8]">La Gotita Curiosa</span>
             </h1>
-          </div>
+            {station?.signMessage && <BookOpen size={12} className="text-[#6B4FA8]/70 ml-0.5" />}
+          </button>
 
           {/* Camino de 5 gotitas de w-7 h-7 */}
           <nav

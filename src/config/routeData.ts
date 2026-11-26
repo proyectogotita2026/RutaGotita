@@ -36,6 +36,8 @@ export const ROUTE_STATIONS: StationData[] = [
       'Descubre por qué las primeras gotas de leche materna salvan vidas y protegen a los bebés.',
     educationalContent:
       'En esta estación aprendemos sobre el "Calostro". Es la primera leche producida por la madre durante los primeros días después del parto. Es espesa, dorada y se le conoce como la primera vacuna del bebé, porque está repleta de defensas naturales que cuidan sus defensas y su corazoncito.',
+    signMessage:
+      'Gotita emprende su ruta, pero tiene muchas preguntas y para lograr aprender se convierte en una Gotita curiosa.',
     type: 'station',
     coordinates: { x: 27.5, y: 33.5 },
     themeColor: 'mint',
@@ -123,6 +125,8 @@ export const ROUTE_STATIONS: StationData[] = [
       'Conoce los filtros de laboratorio que garantizan que cada gota sea 100% segura para bebés prematuros.',
     educationalContent:
       'Al llegar al laboratorio del Banco de Leche Humana, la Gotita se viste con bata de científica. Los profesionales realizan pruebas de acidez, análisis biológico y un proceso suave de calentamiento y enfriamiento rápido llamado "Pasteurización Holder" (62.5 °C por 30 minutos). Así se eliminan microorganismos manteniendo casi intactas sus vitaminas y propiedades.',
+    signMessage:
+      'Después de conocer el Banco de Leche y descubrir cómo se realiza el proceso de donación, Gotita quiere ser donante, ¡ayudémosla a convertirse en una Gotita Valiente!',
     type: 'station',
     coordinates: { x: 72.5, y: 59.0 },
     themeColor: 'lavender',
@@ -153,6 +157,8 @@ export const ROUTE_STATIONS: StationData[] = [
       'Cualquier madre lactante sana con excedente de leche puede convertirse en una superheroína donante.',
     educationalContent:
       '¡Donar leche materna es donar vida! En Nariño, muchas madres generosas que producen más leche de la que su propio hijo necesita, deciden compartirla. Su gesto solidario alimenta a bebés hospitalizados cuyas mamás, por razones de salud temporal, aún no pueden amamantarlos. ¡Cada gota es un abrazo de esperanza!',
+    signMessage:
+      'Gotita aprendió mucho en su viaje por la ruta y ustedes también, ahora ayudemos a Gotita a terminar su aventura superando el último desafío...',
     type: 'station',
     coordinates: { x: 61.5, y: 77.5 },
     themeColor: 'pink',
