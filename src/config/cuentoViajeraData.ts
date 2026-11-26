@@ -4,18 +4,18 @@
  * Banco de Leche Humana - Hospital Universitario Departamental de Nariño (HUDN)
  */
 
-import cuento1 from '../assets/images/escenasCuentoAudio/Cuento1.jpeg';
-import cuento2 from '../assets/images/escenasCuentoAudio/Cuento2.jpeg';
-import cuento3 from '../assets/images/escenasCuentoAudio/Cuento3.jpeg';
-import cuento4 from '../assets/images/escenasCuentoAudio/Cuento4.jpeg';
-import cuento5 from '../assets/images/escenasCuentoAudio/Cuento5.jpeg';
-import cuento6 from '../assets/images/escenasCuentoAudio/Cuento6.jpeg';
-import cuento7 from '../assets/images/escenasCuentoAudio/Cuento7.jpeg';
-import cuento8 from '../assets/images/escenasCuentoAudio/Cuento8.jpeg';
-import cuento9 from '../assets/images/escenasCuentoAudio/Cuento9.jpeg';
-import cuento10 from '../assets/images/escenasCuentoAudio/Cuento10.jpeg';
-import cuento11 from '../assets/images/escenasCuentoAudio/Cuento11.jpeg';
-import cuento12 from '../assets/images/escenasCuentoAudio/Cuento12.jpeg';
+import cuento1 from '../assets/images/escenasCuentoAudio/Cuento1.webp';
+import cuento2 from '../assets/images/escenasCuentoAudio/Cuento2.webp';
+import cuento3 from '../assets/images/escenasCuentoAudio/Cuento3.webp';
+import cuento4 from '../assets/images/escenasCuentoAudio/Cuento4.webp';
+import cuento5 from '../assets/images/escenasCuentoAudio/Cuento5.webp';
+import cuento6 from '../assets/images/escenasCuentoAudio/Cuento6.webp';
+import cuento7 from '../assets/images/escenasCuentoAudio/Cuento7.webp';
+import cuento8 from '../assets/images/escenasCuentoAudio/Cuento8.webp';
+import cuento9 from '../assets/images/escenasCuentoAudio/Cuento9.webp';
+import cuento10 from '../assets/images/escenasCuentoAudio/Cuento10.webp';
+import cuento11 from '../assets/images/escenasCuentoAudio/Cuento11.webp';
+import cuento12 from '../assets/images/escenasCuentoAudio/Cuento12.webp';
 import cuentoAudioUrl from '../assets/images/escenasCuentoAudio/CuentoNarrado.mp4';
 
 export { cuentoAudioUrl };

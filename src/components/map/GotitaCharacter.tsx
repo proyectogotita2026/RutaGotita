@@ -170,7 +170,8 @@ export const GotitaCharacter: React.FC<GotitaCharacterProps> = ({
 
   return (
     <motion.div
-      className="absolute z-30 pointer-events-none -translate-x-1/2 -translate-y-[85%] flex flex-col items-center select-none"
+      className="absolute z-30 pointer-events-none -translate-x-1/2 -translate-y-[85%] flex flex-col items-center select-none transform-gpu"
+      style={{ willChange: 'left, top, transform' }}
       initial={false}
       animate={{
         left: xKeyframes,

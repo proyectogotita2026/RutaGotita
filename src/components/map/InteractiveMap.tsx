@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect, useCallback } from 'react';
+import React, { useRef, useState, useEffect, useCallback, lazy, Suspense } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Home, RotateCcw, Compass, ArrowRight, Copy, Check, Award, Maximize2, Minimize2 } from 'lucide-react';
 import { ROUTE_STATIONS } from '../../config/routeData';
@@ -8,12 +8,22 @@ import { mapBg } from '../../assets/images';
 import { GotitaCharacter } from './GotitaCharacter';
 import { StationHotspot } from './StationHotspot';
 import { StationModal } from './StationModal';
-import { StationOneView } from '../stations/StationOneView';
-import { StationTwoStoryView } from '../stations/StationTwoStoryView';
-import { StationThreePuzzleTimerView } from '../stations/StationThreePuzzleTimerView';
-import { StationFourRiddleView } from '../stations/StationFourRiddleView';
 import { ProgressBadge } from '../ui/ProgressBadge';
 import { ActionButton } from '../ui/ActionButton';
+
+// Code splitting por estación para mantener el mapa ligero y rápido
+const StationOneView = lazy(() =>
+  import('../stations/StationOneView').then((m) => ({ default: m.StationOneView }))
+);
+const StationTwoStoryView = lazy(() =>
+  import('../stations/StationTwoStoryView').then((m) => ({ default: m.StationTwoStoryView }))
+);
+const StationThreePuzzleTimerView = lazy(() =>
+  import('../stations/StationThreePuzzleTimerView').then((m) => ({ default: m.StationThreePuzzleTimerView }))
+);
+const StationFourRiddleView = lazy(() =>
+  import('../stations/StationFourRiddleView').then((m) => ({ default: m.StationFourRiddleView }))
+);
 
 interface InteractiveMapProps {
   onBackToCover: () => void;
@@ -359,6 +369,7 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({ onBackToCover, o
         </AnimatePresence>
 
         {/* Vista interactiva específica para Estación 1: La Gotita Curiosa */}
+        <Suspense fallback={null}>
         <AnimatePresence>
           {isModalOpen && selectedStation?.id === 'estacion-1' && (
             <motion.div
@@ -449,6 +460,7 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({ onBackToCover, o
             </motion.div>
           )}
         </AnimatePresence>
+        </Suspense>
 
         {/* Modal Educativo para otras estaciones */}
         {selectedStation?.id !== 'estacion-1' &&
